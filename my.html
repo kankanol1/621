@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+    .navA{
+        height: 50px;
+        width: 50px;
+        display:block;
+        background-color: #F00;
+    }
+    #header{
+        width: 50px;
+        height: 50px;
+        background-color: #00F;
+    }
+
+</style>
+</head>
+<body>
+<nav class="navA"></nav>
+<div id="header"></div>
+
+<ul id="list">
+    <li class="list-item"><a href="http://localhost:63342/604/my.html?_ijt=p28dqhvdlf8od5sn9vaqdjpnpi" class="list-item-link">Home</a></li>
+    <li class="list-item"><a href="/new" class="list-item-link">News</a></li>
+    <li class="list-item"><a href="/events" class="list-item-link">Events</a></li>
+</ul>
+
+<script>
+    function loadScript(src,onLoad){
+        var scriptTag = document.createElement("script");
+        scriptTag.src = src;
+        if(typeof onLoad === "function"){
+            scriptTag.onload = onLoad;
+            scriptTag.onreadystatechange = function(){
+                if (scriptTag.readyState === 4){
+                    onLoad();
+                }
+            }
+        }
+        document.body.appendChild(scriptTag);
+    }
+    //loadScript("myGlobal.js",function(){alert("script loaded and availabel!");});
+    loadScript("myGlobal.js");
+
+    var nav2 = document.createElement("div");
+    nav2.style.display = "none";
+    nav2.style.height = 50+"px";
+    nav2.style.width = 50+"px";
+    nav2.style.backgroundColor = "#0F0";
+    document.body.appendChild(nav2);
+    nav2.style.display = "block";
+
+    var list = document.getElementById("list");
+    list.style.listStyle = "none";
+    //list.style.listStyleType = "none";
+    function onClick(evt){
+        var clickedElem = evt.target,
+            tagNameSought = "A";
+        alert(clickedElem,tagNameSought);
+        if (clickedElem && clickedElem.tagName === tagNameSought){
+            window.open(clickedElem.href);
+        }
+
+    }
+    list.addEventListener("click",onClick,false);
+
+
+    var scrollTopPosition = 0,
+        scrollLeftPosition = 0,
+        body = document.body,
+        header = document.getElementById("header");
+
+    function onScroll(){
+        scrollTopPosition = body.scrollTop;
+        scrollLeftPosition = body.scrollLeft;
+    }
+    function writeScrollPosition () {
+        header.innerHTML = scrollTopPosition + "px" + scrollLeftPosition + "px";
+    }
+    document.addEventListener("scroll",onScroll,false);
+    window.setInterval(writeScrollPosition,500);
+
+</script>
+</body>
+</html>

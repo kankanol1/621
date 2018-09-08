@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML  Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+
+    <link rel="shortcut ico" type="image/png" href="jasmine-master\lib\jasmine-core/001.png">
+    <link rel="stylesheet" href="jasmine-master\lib\jasmine-core/jasmine.css">
+    <script type="text/javascript" src="jasmine-master\lib\jasmine-core/jasmine.js"></script>
+    <script type="text/javascript" src="jasmine-master\lib\jasmine-core/jasmine-html.js"></script>
+    <script type="text/javascript" src="jasmine-master\lib\jasmine-core/boot.js"></script>
+
+    <script type="text/javascript" src="add.js"></script>
+    <script type="text/javascript" src="add-spec.js"></script>
+    <script type="text/javascript" src="myGlobal.js"></script>
+    <script type="text/javascript">
+        (function() {
+            var jasmineEnv = jasmine.getEnv();
+            jasmineEnv.updateInterval = 1000;
+
+            var htmlReporter = new jasmine.HtmlReporter();
+
+            jasmineEnv.addReporter(htmlReporter);
+
+            jasmineEnv.specFilter = function(spec) {
+                return htmlReporter.specFilter(spec);
+            };
+
+            var currentWindowOnload = window.onload;
+
+            window.onload = function() {
+                if (currentWindowOnload) {
+                    currentWindowOnload();
+                }
+                execJasmine();
+            };
+
+            function execJasmine() {
+                jasmineEnv.execute();
+            }
+
+        })();
+    </script>
+</head>
+<body>
+<script>
+    console.log(add(1,2,3,4));
+</script>
+</body>
+</html>
